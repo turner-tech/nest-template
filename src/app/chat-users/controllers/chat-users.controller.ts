@@ -5,10 +5,10 @@ import { DbUser } from '../models/db-user.interface';
 
 @Controller('chat')
 export class ChatUsersController {
-  constructor(private feedService: ChatUsersService) {}
+  constructor(private chatUsersService: ChatUsersService) {}
 
   @Get('users')
   findSelected(): Observable<DbUser[]> {
-    return this.feedService.findAllPosts();
+    return this.chatUsersService.findAllPosts();
   }
 }

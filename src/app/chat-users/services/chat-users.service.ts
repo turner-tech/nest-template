@@ -9,10 +9,10 @@ import { DbUser } from '../models/db-user.interface';
 export class ChatUsersService {
   constructor(
     @InjectRepository(ChatUsers)
-    private readonly feedPostRepository: Repository<ChatUsers>,
+    private readonly chatUsersRepository: Repository<ChatUsers>,
   ) {}
 
   findAllPosts(): Observable<DbUser[]> {
-    return from(this.feedPostRepository.find());
+    return from(this.chatUsersRepository.find());
   }
 }
