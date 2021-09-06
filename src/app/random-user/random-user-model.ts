@@ -1,15 +1,29 @@
-export interface RandomUser {
+import { ApiProperty } from '@nestjs/swagger';
+
+export class RandomUser {
+  @ApiProperty()
   gender: string;
+  @ApiProperty()
   name: Name;
+  @ApiProperty()
   location: Location;
+  @ApiProperty()
   email: string;
+  @ApiProperty()
   login: Login;
+  @ApiProperty()
   dob: Dob;
+  @ApiProperty()
   registered: Dob;
+  @ApiProperty()
   phone: string;
+  @ApiProperty()
   cell: string;
+  @ApiProperty()
   id: ID;
+  @ApiProperty()
   picture: Picture;
+  @ApiProperty()
   nat: string;
 }
 
