@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
-describe('RandomUserController (e2e)', () => {
+describe('GameController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {

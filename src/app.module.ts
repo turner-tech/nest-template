@@ -4,6 +4,8 @@ import { RandomUserService } from './app/random-user/random-user.service';
 import { HttpModule } from '@nestjs/axios';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ChatUsersModule } from './app/chat-users/chat-users.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { GameModule } from './app/media-game/game.module';
 
 @Module({
   imports: [
@@ -11,6 +13,19 @@ import { ChatUsersModule } from './app/chat-users/chat-users.module';
       timeout: 5000,
       maxRedirects: 5,
     }),
+    MongooseModule.forRoot(
+      'mongodb+srv://' +
+        process.env.MONGODB_USER +
+        ':' +
+        process.env.MONGODB_PASSWORD +
+        process.env.MONGODB_HOST +
+        '/' +
+        process.env.MONGODB_DATABASE +
+        '?retryWrites=true&w=majority',
+      {
+        autoCreate: true,
+      },
+    ),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.POSTGRES_HOST,
@@ -22,6 +37,7 @@ import { ChatUsersModule } from './app/chat-users/chat-users.module';
       synchronize: true,
     }),
     ChatUsersModule,
+    GameModule,
   ],
   controllers: [RandomUserController],
   providers: [RandomUserService],
