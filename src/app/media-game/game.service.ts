@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Game, GameDocument } from './schemas/game.schema';
+import { Game, GameDocument } from './game.schema';
 import { DeleteResult, UpdateResult } from 'mongodb';
 
 @Injectable()
@@ -14,16 +14,20 @@ export class GameService {
     return this.gameModel.find().exec();
   }
 
-  async getGames(name: string): Promise<Game[]> {
+  async getGamesByName(name: string): Promise<Game[]> {
     return this.gameModel.find({ name: new RegExp(name, 'i') }).exec();
   }
 
-  async getGame(name: string): Promise<Game> {
+  async getOneGameByName(name: string): Promise<Game> {
     return this.gameModel.findOne({ name: new RegExp(name, 'i') }).exec();
   }
 
-  async deleteGame(name: string): Promise<DeleteResult> {
-    return this.gameModel.remove({ name: new RegExp(name, 'i') }).exec();
+  async deleteGameByName(name: string): Promise<DeleteResult> {
+    return this.gameModel.deleteOne({ name: new RegExp(name, 'i') }).exec();
+  }
+
+  async deleteGameById(_id: string): Promise<DeleteResult> {
+    return this.gameModel.deleteOne({ _id }).exec();
   }
 
   async createGame(game: Game): Promise<Game> {
@@ -31,7 +35,7 @@ export class GameService {
   }
 
   async updateGame(game: Game): Promise<UpdateResult | Game> {
-    const gameExists: boolean = await this.getGame(game.name).then(
+    const gameExists: boolean = await this.getOneGameByName(game.name).then(
       (game) => !!game,
     );
     if (gameExists) {

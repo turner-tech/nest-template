@@ -2,8 +2,7 @@ import { Module } from '@nestjs/common';
 import { RandomUserController } from './app/random-user/random-user.controller';
 import { RandomUserService } from './app/random-user/random-user.service';
 import { HttpModule } from '@nestjs/axios';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ChatUsersModule } from './app/chat-users/chat-users.module';
+import { ChatUserModule } from './app/chat-users/chat-user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GameModule } from './app/media-game/game.module';
 import { HowLongToBeatModule } from './app/how-long-to-beat/how-long-to-beat.module';
@@ -29,17 +28,7 @@ import { ScheduleModule } from '@nestjs/schedule';
         autoCreate: true,
       },
     ),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.POSTGRES_HOST,
-      port: parseInt(<string>process.env.POSTGRES_PORT),
-      username: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DATABASE,
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
-    ChatUsersModule,
+    ChatUserModule,
     GameModule,
     HowLongToBeatModule,
   ],

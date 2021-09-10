@@ -1,4 +1,4 @@
-import { Game } from './schemas/game.schema';
+import { Game } from './game.schema';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
