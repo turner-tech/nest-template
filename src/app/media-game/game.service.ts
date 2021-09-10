@@ -30,7 +30,14 @@ export class GameService {
     return this.gameModel.create({ ...game });
   }
 
-  async updateGame(game: Game): Promise<UpdateResult> {
-    return this.gameModel.updateOne({ ...game });
+  async updateGame(game: Game): Promise<UpdateResult | Game> {
+    const gameExists: boolean = await this.getGame(game.name).then(
+      (game) => !!game,
+    );
+    if (gameExists) {
+      return this.gameModel.updateOne({ ...game });
+    } else {
+      return this.createGame(game);
+    }
   }
 }

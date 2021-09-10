@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ChatUsersModule } from './app/chat-users/chat-users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GameModule } from './app/media-game/game.module';
+import { HowLongToBeatModule } from './app/how-long-to-beat/how-long-to-beat.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -13,6 +15,7 @@ import { GameModule } from './app/media-game/game.module';
       timeout: 5000,
       maxRedirects: 5,
     }),
+    ScheduleModule.forRoot(),
     MongooseModule.forRoot(
       'mongodb+srv://' +
         process.env.MONGODB_USER +
@@ -38,6 +41,7 @@ import { GameModule } from './app/media-game/game.module';
     }),
     ChatUsersModule,
     GameModule,
+    HowLongToBeatModule,
   ],
   controllers: [RandomUserController],
   providers: [RandomUserService],
