@@ -7,11 +7,11 @@ import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 @ApiTags('random users')
 @Controller('randomUser')
 export class RandomUserController {
-  constructor(private readonly appService: RandomUserService) {}
+  constructor(private readonly randomUserService: RandomUserService) {}
 
   @ApiOkResponse({ type: RandomUser, isArray: true })
-  @Get('user')
+  @Get('')
   getUser(): Observable<RandomUser[]> {
-    return this.appService.getUser();
+    return this.randomUserService.getUser();
   }
 }

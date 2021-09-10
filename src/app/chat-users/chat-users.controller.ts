@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { ChatUsersService } from '../services/chat-users.service';
-import { DbUser } from '../models/db-user.interface';
+import { ChatUsersService } from './chat-users.service';
+import { DbUser } from './db-user.interface';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('users')
